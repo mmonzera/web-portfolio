@@ -283,12 +283,19 @@ function App() {
             </div>
           </header>
 
-          <div className="quest-cover-visual">
-            <div className="quest-cover-overlay">
-              <Terminal size={32} />
-              <span style={{ marginTop: '15px' }}>ACCESSING SECURE MAINFRAME...</span>
+          {/* Cover Visual — shows thumbnail if set, otherwise a placeholder */}
+          {current.thumbnail ? (
+            <div className="quest-cover-img">
+              <img src={current.thumbnail} alt={`${current.title} cover`} />
             </div>
-          </div>
+          ) : (
+            <div className="quest-cover-visual">
+              <div className="quest-cover-overlay">
+                <Terminal size={32} />
+                <span style={{ marginTop: '15px' }}>ACCESSING SECURE MAINFRAME...</span>
+              </div>
+            </div>
+          )}
 
           <div className="quest-metrics-grid">
             {current.metrics && current.metrics.map((metric) => (
@@ -324,6 +331,22 @@ function App() {
               ))}
             </div>
           </section>
+
+          {/* Gallery Images — shown when images are uploaded via CMS */}
+          {current.images && current.images.length > 0 && (
+            <section className="quest-article-section">
+              <h2 className="quest-section-title-modern">
+                <Layers size={20} /> Design Gallery
+              </h2>
+              <div className="quest-gallery-grid">
+                {current.images.map((img, idx) => (
+                  <div key={idx} className="quest-gallery-item">
+                    <img src={img} alt={`${current.title} screenshot ${idx + 1}`} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="quest-end-marker">
              // END OF REPORT //
@@ -583,63 +606,37 @@ function App() {
               <p className="pane-subtitle">Moses's design contributions and product milestones.</p>
             </div>
             <div className="projects-grid">
-              <div className="project-card" onMouseEnter={() => playClickSound(600, 0.04, 'triangle')}>
-                <div className="project-preview preview-1">
-                  <div className="project-preview-overlay">
-                    <span className="system-type">FINTECH_LMS.EXE</span>
+              {quests.map((quest, i) => (
+                <div
+                  key={quest.id}
+                  className="project-card"
+                  onMouseEnter={() => playClickSound(600 + i * 50, 0.04, 'triangle')}
+                >
+                  <div
+                    className="project-preview"
+                    style={quest.thumbnail
+                      ? { backgroundImage: `url(${quest.thumbnail})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                      : { background: `linear-gradient(135deg, hsl(${220 + i * 30}, 30%, 14%), hsl(${220 + i * 30}, 25%, 8%))` }
+                    }
+                  >
+                    <div className="project-preview-overlay">
+                      <span className="system-type">{quest.system}</span>
+                    </div>
+                  </div>
+                  <div className="project-info">
+                    <h4>{quest.title}</h4>
+                    <p>{quest.subtitle}</p>
+                    <div className="tags-container">
+                      {quest.stack && quest.stack.slice(0, 3).map(t => (
+                        <span key={t} className="tag">{t.toUpperCase()}</span>
+                      ))}
+                    </div>
+                    <button className="launch-quest-btn" onClick={() => startQuest(quest.title, quest.id)}>
+                      LAUNCH QUEST <ArrowRight size={10} style={{ marginLeft: '4px' }} />
+                    </button>
                   </div>
                 </div>
-                <div className="project-info">
-                  <h4>iDecision platform</h4>
-                  <p>Designed and shipped 20+ onboarding, loan processing, AML, fraud, and field collection modules deployed to multiple banks.</p>
-                  <div className="tags-container">
-                    <span className="tag">FIGMA</span>
-                    <span className="tag">FINTECH</span>
-                    <span className="tag">SYSTEM DESIGN</span>
-                  </div>
-                  <button className="launch-quest-btn" onClick={() => startQuest('iDecision platform', 'idecision')}>
-                    LAUNCH QUEST <ArrowRight size={10} style={{ marginLeft: '4px' }} />
-                  </button>
-                </div>
-              </div>
-              <div className="project-card" onMouseEnter={() => playClickSound(650, 0.04, 'triangle')}>
-                <div className="project-preview preview-2">
-                  <div className="project-preview-overlay">
-                    <span className="system-type">DESIGN_SYSTEM.SYS</span>
-                  </div>
-                </div>
-                <div className="project-info">
-                  <h4>Enterprise Design System</h4>
-                  <p>Co-built a highly scalable design system of 30-40 UI components adopted by 3 development teams, cutting down rework.</p>
-                  <div className="tags-container">
-                    <span className="tag">COMPONENTS</span>
-                    <span className="tag">TOKENS</span>
-                    <span className="tag">DEV HANDOFF</span>
-                  </div>
-                  <button className="launch-quest-btn" onClick={() => startQuest('Enterprise Design System', 'designsystem')}>
-                    LAUNCH QUEST <ArrowRight size={10} style={{ marginLeft: '4px' }} />
-                  </button>
-                </div>
-              </div>
-              <div className="project-card" onMouseEnter={() => playClickSound(700, 0.04, 'triangle')}>
-                <div className="project-preview preview-3">
-                  <div className="project-preview-overlay">
-                    <span className="system-type">COLLECTION_FLOW.ROM</span>
-                  </div>
-                </div>
-                <div className="project-info">
-                  <h4>Collection Module Redesign</h4>
-                  <p>Led end-to-end UX flow redesign for field agents, drastically reducing loan collection task-completion times.</p>
-                  <div className="tags-container">
-                    <span className="tag">UX RESEARCH</span>
-                    <span className="tag">WORKFLOW</span>
-                    <span className="tag">FINANCIALS</span>
-                  </div>
-                  <button className="launch-quest-btn" onClick={() => startQuest('Collection Module Redesign', 'collection')}>
-                    LAUNCH QUEST <ArrowRight size={10} style={{ marginLeft: '4px' }} />
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
         );

@@ -2272,6 +2272,61 @@ textarea {
   overflow: hidden;
 }
 
+/* Thumbnail Cover Image (from CMS) */
+.quest-cover-img {
+  width: 100%;
+  height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.quest-cover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.4s ease;
+}
+
+.quest-cover-img:hover img {
+  transform: scale(1.02);
+}
+
+/* Design Gallery Grid */
+.quest-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.quest-gallery-item {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(15, 23, 42, 0.4);
+  transition: all 0.25s ease;
+  cursor: zoom-in;
+}
+
+.quest-gallery-item:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.quest-gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+
 /* Grid Metrics Cards */
 .quest-metrics-grid {
   display: grid;

@@ -5,8 +5,10 @@
       "title": "iDecision Platform",
       "system": "FINTECH_LMS.EXE",
       "subtitle": "STAGE 01 // DEPLOYED FINTECH ARCHITECTURE",
+      "thumbnail": "",
       "challenge": "Legacy loan servicing and AML compliance systems were extremely complex, slow, and error-prone. Credit operators took an average of 45 minutes to process a single application, causing bottleneck issues across financial institutions.",
       "solution": "Re-architected the entire loan application pipeline into a unified, high-contrast usability dashboard. Built automated credit-scoring trackers, responsive inline data verification alerts, and a streamlined AML risk checklist directly aligned to UI states.",
+      "images": [],
       "metrics": [
         { "label": "Approval Speed", "value": "+45%", "desc": "Reduction in overall loan validation & decision times." },
         { "label": "Data Accuracy", "value": "+30%", "desc": "Decrease in human operator input and AML filing mistakes." },
@@ -19,8 +21,10 @@
       "title": "Enterprise Design System",
       "system": "DESIGN_SYSTEM.SYS",
       "subtitle": "STAGE 02 // MULTI-PLATFORM COMPONENT LIBRARY",
+      "thumbnail": "",
       "challenge": "Fragmented product teams designed buttons, cards, and modal components in isolation. This caused severe design debt, structural layout inconsistencies, and frontend code redundancy across 3 major product lines.",
       "solution": "Designed and engineered a centralized, highly accessible Figma UI component library linked to strict JSON design tokens. Set up automatic dev handoff guidelines, Figma token-sync pipelines, and synchronized component blueprints with React and native iOS teams.",
+      "images": [],
       "metrics": [
         { "label": "Handoff Velocity", "value": "+50%", "desc": "Increase in design-to-development execution speeds." },
         { "label": "Consistency Rating", "value": "100%", "desc": "Unified branding standards achieved across all portal apps." },
@@ -33,8 +37,10 @@
       "title": "Collection Module Redesign",
       "system": "COLLECTION_FLOW.ROM",
       "subtitle": "STAGE 03 // FIELD AGENT TRANSACTION WORKFLOW",
+      "thumbnail": "",
       "challenge": "Field debt-collectors struggled to operate complex, multi-page financial tracking forms on mobile devices while traveling in areas with extremely poor, intermittent internet access.",
       "solution": "Crafted a single-scroll, offline-first mobile web dashboard. Re-designed form patterns to have high-contrast, oversized target click zones, built smart cash receipt ledger prioritizations, and integrated automated local storage transaction queues.",
+      "images": [],
       "metrics": [
         { "label": "Field Velocity", "value": "+65%", "desc": "Drastic task completion acceleration for mobile collections." },
         { "label": "Offline Accuracy", "value": "99.8%", "desc": "Offline transaction synchronization rate without data loss." },

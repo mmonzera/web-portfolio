@@ -19,12 +19,26 @@ collections:
             label: "Quests"
             widget: "list"
             fields:
-              - {label: "Quest ID (no spaces)", name: "id", widget: "string"}
+              - {label: "Quest ID (no spaces, lowercase)", name: "id", widget: "string"}
               - {label: "Title", name: "title", widget: "string"}
               - {label: "System Name (e.g. SYSTEM.EXE)", name: "system", widget: "string"}
               - {label: "Subtitle", name: "subtitle", widget: "string"}
+              - label: "Thumbnail Image"
+                name: "thumbnail"
+                widget: "image"
+                required: false
+                hint: "Main cover image shown on the works card list"
               - {label: "Challenge", name: "challenge", widget: "text"}
               - {label: "Solution", name: "solution", widget: "text"}
+              - label: "Gallery Images"
+                name: "images"
+                widget: "list"
+                required: false
+                hint: "Screenshots or visuals shown inside the quest detail page"
+                field:
+                  label: "Image"
+                  name: "image"
+                  widget: "image"
               - label: "Tech Stack"
                 name: "stack"
                 widget: "list"
