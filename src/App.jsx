@@ -30,6 +30,8 @@ function App() {
   const containerRef = useRef(null);
   const bgLoadedRef = useRef(false);
 
+  const quests = questData ? Object.values(questData) : [];
+
   useEffect(() => {
     // Fetch CMS data
     fetch('/content/quests.json')
