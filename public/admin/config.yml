@@ -1,33 +1,36 @@
 backend:
   name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  branch: main
 
-media_folder: "public/assets/uploads" # Media files will be stored in the repo under public/assets/uploads
-public_folder: "/assets/uploads" # The src attribute for uploaded media will begin with /assets/uploads
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
   - name: "portfolio"
     label: "Portfolio Quests"
-    file: "public/content/quests.json"
-    fields:
+    files:
       - name: "quests"
-        label: "Quests"
-        widget: "list"
+        label: "All Quests"
+        file: "public/content/quests.json"
         fields:
-          - {label: "Quest ID (no spaces)", name: "id", widget: "string"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "System Name (e.g. SYSTEM.EXE)", name: "system", widget: "string"}
-          - {label: "Subtitle", name: "subtitle", widget: "string"}
-          - {label: "Challenge", name: "challenge", widget: "text"}
-          - {label: "Solution", name: "solution", widget: "text"}
-          - label: "Tech Stack"
-            name: "stack"
-            widget: "list"
-            field: {label: "Tech", name: "tech", widget: "string"}
-          - label: "Metrics"
-            name: "metrics"
+          - name: "quests"
+            label: "Quests"
             widget: "list"
             fields:
-              - {label: "Label", name: "label", widget: "string"}
-              - {label: "Value", name: "value", widget: "string"}
-              - {label: "Description", name: "desc", widget: "string"}
+              - {label: "Quest ID (no spaces)", name: "id", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "System Name (e.g. SYSTEM.EXE)", name: "system", widget: "string"}
+              - {label: "Subtitle", name: "subtitle", widget: "string"}
+              - {label: "Challenge", name: "challenge", widget: "text"}
+              - {label: "Solution", name: "solution", widget: "text"}
+              - label: "Tech Stack"
+                name: "stack"
+                widget: "list"
+                field: {label: "Tech", name: "tech", widget: "string"}
+              - label: "Metrics"
+                name: "metrics"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "Value", name: "value", widget: "string"}
+                  - {label: "Description", name: "desc", widget: "string"}
