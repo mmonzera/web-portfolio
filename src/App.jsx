@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight, BookOpen, Menu, Edit2, Trash2, Save, Plus } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import './App.css';
 import lookingRight from './assets/looking-right.png';
 import lookingLeft from './assets/looking-left.png';
@@ -311,14 +312,36 @@ function App() {
             <h2 className="quest-section-title-modern">
               <Compass size={20} /> The Challenge
             </h2>
-            <p className="quest-article-text">{current.challenge}</p>
+            <div className="quest-article-text quest-markdown">
+              <ReactMarkdown
+                components={{
+                  img: ({src, alt}) => (
+                    <div className="quest-inline-img">
+                      <img src={src} alt={alt} />
+                      {alt && <span className="quest-img-caption">{alt}</span>}
+                    </div>
+                  )
+                }}
+              >{current.challenge}</ReactMarkdown>
+            </div>
           </section>
 
           <section className="quest-article-section">
             <h2 className="quest-section-title-modern">
               <Zap size={20} /> The Solution
             </h2>
-            <p className="quest-article-text">{current.solution}</p>
+            <div className="quest-article-text quest-markdown">
+              <ReactMarkdown
+                components={{
+                  img: ({src, alt}) => (
+                    <div className="quest-inline-img">
+                      <img src={src} alt={alt} />
+                      {alt && <span className="quest-img-caption">{alt}</span>}
+                    </div>
+                  )
+                }}
+              >{current.solution}</ReactMarkdown>
+            </div>
           </section>
 
           <section className="quest-article-section">

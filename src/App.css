@@ -2256,6 +2256,62 @@ textarea {
   font-weight: 400;
 }
 
+/* Markdown rendering inside article sections */
+.quest-markdown p {
+  margin-bottom: 1.2em;
+}
+
+.quest-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.quest-markdown strong {
+  color: #F1F5F9;
+  font-weight: 600;
+}
+
+.quest-markdown em {
+  color: #94A3B8;
+  font-style: italic;
+}
+
+.quest-markdown ul,
+.quest-markdown ol {
+  padding-left: 24px;
+  margin-bottom: 1.2em;
+}
+
+.quest-markdown li {
+  margin-bottom: 6px;
+}
+
+/* Inline image inside solution/challenge text */
+.quest-inline-img {
+  margin: 28px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.quest-inline-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.quest-img-caption {
+  display: block;
+  background: rgba(15, 23, 42, 0.8);
+  color: #64748B;
+  font-size: 12px;
+  font-family: 'Press Start 2P', monospace;
+  padding: 10px 14px;
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
 /* Cover Image Placeholder */
 .quest-cover-visual {
   width: 100%;

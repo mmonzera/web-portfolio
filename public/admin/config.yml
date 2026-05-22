@@ -28,8 +28,14 @@ collections:
                 widget: "image"
                 required: false
                 hint: "Main cover image shown on the works card list"
-              - {label: "Challenge", name: "challenge", widget: "text"}
-              - {label: "Solution", name: "solution", widget: "text"}
+              - label: "Challenge"
+                name: "challenge"
+                widget: "markdown"
+                hint: "Supports **bold**, _italic_, lists, and ![caption](image-url) for inline images"
+              - label: "Solution"
+                name: "solution"
+                widget: "markdown"
+                hint: "Supports **bold**, _italic_, lists, and ![caption](image-url) for inline images"
               - label: "Gallery Images"
                 name: "images"
                 widget: "list"
