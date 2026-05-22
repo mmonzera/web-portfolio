@@ -1006,9 +1006,9 @@ textarea {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   width: 100%;
-  max-width: 850px;
+  max-width: 960px;
   height: 90%;
-  max-height: 590px;
+  max-height: 650px;
   display: flex;
   flex-direction: column;
   box-shadow:
@@ -1055,7 +1055,7 @@ textarea {
 
 .popup-header h2 {
   font-family: 'Press Start 2P', monospace;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--theme-accent);
   margin-bottom: 22px;
   text-shadow: 0 0 10px rgba(var(--theme-accent-rgb), 0.3);
@@ -1074,7 +1074,7 @@ textarea {
   padding: 10px 18px;
   border-radius: 8px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 9px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1163,7 +1163,7 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 240px;
+  width: 280px;
   flex-shrink: 0;
 }
 
@@ -1176,8 +1176,8 @@ textarea {
 }
 
 .avatar-pixel-border {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   border: 4px solid var(--theme-accent);
   border-radius: 8px;
   background: rgba(var(--theme-accent-rgb), 0.1);
@@ -1198,7 +1198,7 @@ textarea {
   align-items: center;
   gap: 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 9px;
   color: var(--theme-accent);
 }
 
@@ -1247,7 +1247,7 @@ textarea {
   align-items: center;
   gap: 8px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 9px;
   color: var(--theme-accent-light);
   text-shadow: 0 0 5px rgba(var(--theme-accent-rgb), 0.2);
 }
@@ -1338,19 +1338,19 @@ textarea {
 .skill-category {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .skill-cat-label {
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 8px;
   color: #c8e6c9;
   font-weight: bold;
 }
 
 .skill-items {
-  font-size: 10.5px;
-  line-height: 1.55;
+  font-size: 12px;
+  line-height: 1.65;
   color: #94a3b8;
   word-break: break-word;
 }
@@ -1374,7 +1374,7 @@ textarea {
 
 .chat-bubble-intro h4 {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: var(--theme-accent-light);
   text-shadow: 0 0 8px rgba(var(--theme-accent-rgb), 0.3);
 }
@@ -1384,8 +1384,8 @@ textarea {
 }
 
 .about-text p {
-  font-size: 14.5px;
-  line-height: 1.7;
+  font-size: 15.5px;
+  line-height: 1.75;
   color: #cbd5e1;
   margin-bottom: 16px;
 }
@@ -1398,7 +1398,7 @@ textarea {
   color: #94a3b8;
   margin: 22px 0;
   border-radius: 0 8px 8px 0;
-  font-size: 13.5px;
+  font-size: 14.5px;
 }
 
 .hobbies-tags {
@@ -1539,12 +1539,12 @@ textarea {
 
 .project-card h4 {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: #fff;
 }
 
 .project-card p {
-  font-size: 12.5px;
+  font-size: 13.5px;
   line-height: 1.6;
   color: #94a3b8;
   height: 60px;
@@ -1565,7 +1565,7 @@ textarea {
 .tag {
   display: inline-block;
   font-family: 'Press Start 2P', monospace;
-  font-size: 6.5px;
+  font-size: 7.5px;
   background: rgba(255, 255, 255, 0.04);
   color: #a5d6a7;
   padding: 4px 8px;
@@ -1580,7 +1580,7 @@ textarea {
   padding: 9px 12px;
   border-radius: 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1662,13 +1662,13 @@ textarea {
 
 .timeline-date {
   font-family: 'Press Start 2P', monospace;
-  font-size: 8px;
+  font-size: 9.5px;
   color: var(--theme-accent);
 }
 
 .timeline-level {
   font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
+  font-size: 8px;
   color: #ffb74d;
   background: rgba(255, 183, 77, 0.08);
   padding: 3px 6px;
@@ -1685,7 +1685,7 @@ textarea {
 .timeline-company-badge {
   display: inline-block;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7.5px;
+  font-size: 8.5px;
   color: var(--theme-accent-light);
   background: rgba(var(--theme-accent-rgb), 0.08);
   border: 1px solid rgba(var(--theme-accent-rgb), 0.25);
@@ -1704,8 +1704,8 @@ textarea {
 }
 
 .timeline-bullets li {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.7;
   color: #cbd5e1;
   padding-left: 18px;
   position: relative;
@@ -1730,7 +1730,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   font-family: 'Press Start 2P', monospace;
-  font-size: 7.5px;
+  font-size: 8.5px;
   color: #5d5d6c;
   background: rgba(10, 8, 18, 0.15);
 }
@@ -1792,7 +1792,7 @@ textarea {
   /* Glassmorphism modal tablet adjustments */
   .glass-popup {
     height: 94%;
-    max-height: 540px;
+    max-height: 600px;
   }
 
   .popup-header {
@@ -1811,7 +1811,7 @@ textarea {
 
   .about-left {
     width: 100%;
-    max-width: 320px;
+    max-width: 450px;
   }
 
   .about-right {
@@ -1861,7 +1861,7 @@ textarea {
   .glass-popup {
     border-radius: 14px;
     height: 96%;
-    max-height: 520px;
+    max-height: 580px;
   }
 
   .popup-header {
@@ -1869,7 +1869,7 @@ textarea {
   }
 
   .popup-header h2 {
-    font-size: 9px;
+    font-size: 10px;
     margin-bottom: 16px;
   }
 
@@ -1880,7 +1880,7 @@ textarea {
 
   .tab-btn {
     padding: 8px 12px;
-    font-size: 7.5px;
+    font-size: 8px;
     flex-grow: 1;
     justify-content: center;
   }
@@ -1894,11 +1894,11 @@ textarea {
   }
 
   .pane-header h3 {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .pane-subtitle {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .about-grid {
@@ -1906,7 +1906,7 @@ textarea {
   }
 
   .about-left {
-    max-width: 280px;
+    max-width: 100%;
   }
 
   .avatar-pixel-border {
@@ -1915,23 +1915,45 @@ textarea {
   }
 
   .about-text p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .skill-cat-label {
+    font-size: 8px;
+  }
+
+  .skill-items {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .project-card h4 {
+    font-size: 10px;
+  }
+
+  .project-card p {
     font-size: 13px;
-    line-height: 1.6;
+    height: auto;
+    -webkit-line-clamp: initial;
+  }
+
+  .tag {
+    font-size: 7px;
+  }
+
+  .launch-quest-btn {
+    font-size: 7.5px;
   }
 
   .quote-box {
-    font-size: 12.5px;
+    font-size: 13px;
     margin: 15px 0;
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 18px;
-  }
-
-  .project-card p {
-    height: auto;
-    -webkit-line-clamp: initial;
   }
 
   .experience-timeline {
@@ -1959,7 +1981,19 @@ textarea {
   }
 
   .timeline-bullets li {
-    font-size: 12px;
+    font-size: 13px;
+  }
+
+  .timeline-company-badge {
+    font-size: 8px;
+  }
+
+  .timeline-date {
+    font-size: 8.5px;
+  }
+
+  .timeline-level {
+    font-size: 8px;
   }
 
   .popup-footer {
