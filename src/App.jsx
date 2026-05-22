@@ -750,7 +750,16 @@ function App() {
               <div className="popup-body">{renderTabContent()}</div>
               <div className="popup-footer">
                 <span className="footer-status"><Activity size={10} className="pulse-icon" /> CPU TEMP: 42°C // MEM: 512KB // SYS: ACTIVE</span>
-                <span className="footer-copyright">© 2026 WORKSPACE.SYS</span>
+                <span className="footer-copyright">
+                  © 2026 WORKSPACE.SYS
+                  <a
+                    href="/?admin=m0s3s-lab-2026"
+                    title="System Admin"
+                    style={{ marginLeft: 10, opacity: 0.2, fontSize: 11, textDecoration: 'none', color: 'inherit', transition: 'opacity 0.3s' }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.7'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '0.2'}
+                  >🔐</a>
+                </span>
               </div>
             </motion.div>
           </motion.div>

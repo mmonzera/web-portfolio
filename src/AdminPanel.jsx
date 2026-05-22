@@ -23,6 +23,14 @@ export default function AdminPanel() {
   const [password, setPassword]           = useState('');
   const [pwError, setPwError]             = useState('');
 
+  // Forgot password state
+  const [resetView, setResetView]   = useState(null); // null | 'sending' | 'verify'
+  const [resetToken, setResetToken] = useState('');
+  const [resetOtp, setResetOtp]     = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetLoading, setResetLoading] = useState(false);
+  const [maskedEmail, setMaskedEmail]   = useState('');
+
   // Data state
   const [quests, setQuests]         = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -59,6 +67,56 @@ export default function AdminPanel() {
     } else {
       setPwError('ACCESS DENIED. Incorrect password.');
     }
+  };
+
+  // ─── FORGOT PASSWORD ────────────────────────────────────
+  const handleForgotPassword = async () => {
+    setResetView('sending');
+    setResetError('');
+    setResetLoading(true);
+    try {
+      const res  = await fetch('/api/forgot-password', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        setResetToken(data.token);
+        setMaskedEmail(data.maskedEmail || 'mo***@gmail.com');
+        setResetView('verify');
+        // In local dev without RESEND_API_KEY, show OTP directly
+        if (data.devOtp) setResetOtp(data.devOtp);
+      } else {
+        setResetError(data.error || 'Failed to send OTP.');
+        setResetView(null);
+      }
+    } catch {
+      setResetError('Network error. Please try again.');
+      setResetView(null);
+    }
+    setResetLoading(false);
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setResetError('');
+    setResetLoading(true);
+    try {
+      const res  = await fetch('/api/verify-otp', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ otp: resetOtp, token: resetToken }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setAuthenticated(true);
+        setResetView(null);
+        setResetOtp('');
+        setResetToken('');
+      } else {
+        setResetError(data.error || 'Verification failed.');
+      }
+    } catch {
+      setResetError('Network error. Please try again.');
+    }
+    setResetLoading(false);
   };
 
   // ─── QUEST SELECTION ────────────────────────────────────
@@ -185,8 +243,64 @@ export default function AdminPanel() {
     });
   };
 
-  // ─── AUTH SCREEN ────────────────────────────────────────
   if (!authenticated) {
+    // ── OTP Verify Screen
+    if (resetView === 'verify') {
+      return (
+        <div className="adm-root">
+          <div className="adm-auth-screen">
+            <div className="adm-auth-card">
+              <span className="adm-auth-icon">📬</span>
+              <div className="adm-auth-title">CHECK YOUR EMAIL</div>
+              <div className="adm-auth-sub" style={{ marginBottom: 6 }}>OTP sent to</div>
+              <div style={{ color: '#58a6ff', fontSize: 13, letterSpacing: 1, marginBottom: 20 }}>{maskedEmail}</div>
+              <form onSubmit={handleVerifyOtp}>
+                <input
+                  className="adm-auth-input"
+                  type="text"
+                  placeholder="ENTER OTP (e.g. A3F2C1B4)"
+                  value={resetOtp}
+                  onChange={e => { setResetOtp(e.target.value.toUpperCase()); setResetError(''); }}
+                  maxLength={8}
+                  autoFocus
+                />
+                <button className="adm-auth-btn" type="submit" disabled={resetLoading}>
+                  {resetLoading ? '⟳ VERIFYING...' : 'VERIFY OTP →'}
+                </button>
+              </form>
+              {resetError && <div className="adm-auth-error">{resetError}</div>}
+              <button
+                className="adm-forgot-link"
+                style={{ marginTop: 16 }}
+                onClick={() => { setResetView(null); setResetOtp(''); setResetError(''); }}
+              >
+                ← Back to Login
+              </button>
+              <div style={{ marginTop: 12, color: '#6e7681', fontSize: 10, letterSpacing: 1 }}>
+                OTP expires in 15 minutes
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ── Sending OTP Screen
+    if (resetView === 'sending') {
+      return (
+        <div className="adm-root">
+          <div className="adm-auth-screen">
+            <div className="adm-auth-card">
+              <span className="adm-auth-icon" style={{ animation: 'spin 1s linear infinite', display: 'inline-block' }}>⟳</span>
+              <div className="adm-auth-title">SENDING OTP...</div>
+              <div className="adm-auth-sub">Dispatching temporary password to email</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ── Default Login Screen
     return (
       <div className="adm-root">
         <div className="adm-auth-screen">
@@ -206,6 +320,14 @@ export default function AdminPanel() {
               <button className="adm-auth-btn" type="submit">AUTHENTICATE →</button>
             </form>
             {pwError && <div className="adm-auth-error">{pwError}</div>}
+            <button
+              className="adm-forgot-link"
+              onClick={handleForgotPassword}
+              disabled={resetLoading}
+            >
+              Forgot password? Send OTP to email →
+            </button>
+            {resetError && <div className="adm-auth-error">{resetError}</div>}
           </div>
         </div>
       </div>

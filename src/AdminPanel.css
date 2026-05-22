@@ -3,6 +3,11 @@
    Access: /?admin=m0s3s-lab-2026
    ============================================= */
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 .adm-root {
@@ -94,6 +99,24 @@
   font-size: 12px;
   letter-spacing: 1px;
 }
+
+.adm-forgot-link {
+  background: none;
+  border: none;
+  color: #6e7681;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 14px;
+  padding: 4px 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: color 0.2s;
+}
+.adm-forgot-link:hover:not(:disabled) { color: #58a6ff; }
+.adm-forgot-link:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ── MAIN LAYOUT ── */
 .adm-layout {
