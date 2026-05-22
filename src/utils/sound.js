@@ -45,8 +45,8 @@ export function playBootSound() {
       playClickSound(1800, 0.04, 'triangle');
     }, 350);
 
-  } catch (e) {
-    console.warn("Audio context failed to start:", e);
+  } catch {
+    console.warn('Audio context failed to start.');
   }
 }
 
@@ -72,8 +72,8 @@ export function playClickSound(freq = 800, duration = 0.08, type = 'sine') {
     
     osc.start(now);
     osc.stop(now + duration + 0.01);
-  } catch (e) {
-    console.warn("Sound play error:", e);
+  } catch {
+    console.warn('Sound play error.');
   }
 }
 
@@ -97,7 +97,7 @@ export function playTabSound() {
     
     osc1.start(now);
     osc1.stop(now + 0.04);
-  } catch (e) {
+  } catch {
     // Fail silently
   }
 }
@@ -123,7 +123,7 @@ export function playCloseSound() {
     
     osc.start(now);
     osc.stop(now + 0.26);
-  } catch (e) {
+  } catch {
     // Fail silently
   }
 }
@@ -165,7 +165,7 @@ export function playRgbSwitchSound() {
     
     oscFan.start(now);
     oscFan.stop(now + 0.31);
-  } catch (e) {
+  } catch {
     // Fail silently
   }
 }
@@ -194,7 +194,7 @@ export function playQuestStartSound() {
       osc.start(now + index * 0.08);
       osc.stop(now + index * 0.08 + 0.25);
     });
-  } catch (e) {
+  } catch {
     // Fail silently
   }
 }
@@ -244,7 +244,7 @@ export function playStartGameSound() {
       osc.start(now + 0.28 + index * 0.06);
       osc.stop(now + 0.28 + index * 0.06 + 0.25);
     });
-  } catch (e) {
+  } catch {
     // Fail silently
   }
 }

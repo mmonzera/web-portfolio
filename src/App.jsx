@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight, BookOpen, Menu, Edit2, Trash2, Save, Plus } from 'lucide-react';
+import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 import lookingRight from './assets/looking-right.png';
@@ -22,11 +22,7 @@ function App() {
   const [launchingQuest, setLaunchingQuest] = useState(null);
   const [questProgress, setQuestProgress] = useState(0);
   const [activeQuest, setActiveQuest] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [questData, setQuestData] = useState(null);
-  const [isAdminMode, setIsAdminMode] = useState(false);
-  const [editingQuestKey, setEditingQuestKey] = useState(null);
-  const [adminFormData, setAdminFormData] = useState({});
   const containerRef = useRef(null);
   const bgLoadedRef = useRef(false);
 
@@ -382,160 +378,7 @@ function App() {
     );
   };
 
-  const startEditQuest = (key) => {
-    setEditingQuestKey(key);
-    if (key === 'new') {
-      setAdminFormData({ title: '', system: '', subtitle: '', challenge: '', solution: '', stack: '', metrics: [] });
-    } else {
-      const q = questData[key];
-      setAdminFormData({
-        ...q,
-        stack: q.stack ? q.stack.join(', ') : '',
-        metrics: q.metrics ? q.metrics.map(m => ({ ...m })) : []
-      });
-    }
-  };
-
-  const handleAdminSave = async (e) => {
-    e.preventDefault();
-    const newQuestData = { ...questData };
-    const key = editingQuestKey === 'new' ? adminFormData.title.toLowerCase().replace(/[^a-z0-9]/g, '') : editingQuestKey;
-    
-    newQuestData[key] = {
-      title: adminFormData.title,
-      system: adminFormData.system,
-      subtitle: adminFormData.subtitle,
-      challenge: adminFormData.challenge,
-      solution: adminFormData.solution,
-      stack: adminFormData.stack.split(',').map(s => s.trim()).filter(Boolean),
-      metrics: adminFormData.metrics || []
-    };
-
-    setQuestData(newQuestData);
-    setEditingQuestKey(null);
-
-    try {
-      await fetch('/api/save-quests', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newQuestData)
-      });
-    } catch(err) {
-      console.error("Save failed:", err);
-    }
-  };
-
-  const handleDeleteQuest = async (key) => {
-    const newQuestData = { ...questData };
-    delete newQuestData[key];
-    setQuestData(newQuestData);
-    try {
-      await fetch('/api/save-quests', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newQuestData)
-      });
-    } catch(err) {
-      console.error("Delete failed:", err);
-    }
-  };
-
-  const handleMetricChange = (index, field, value) => {
-    const newMetrics = [...adminFormData.metrics];
-    newMetrics[index][field] = value;
-    setAdminFormData({ ...adminFormData, metrics: newMetrics });
-  };
-
-  const addMetric = () => {
-    setAdminFormData({
-      ...adminFormData,
-      metrics: [...(adminFormData.metrics || []), { label: '', value: '', desc: '' }]
-    });
-  };
-
-  const removeMetric = (index) => {
-    const newMetrics = [...adminFormData.metrics];
-    newMetrics.splice(index, 1);
-    setAdminFormData({ ...adminFormData, metrics: newMetrics });
-  };
-
-  const renderAdminPanel = () => {
-    if (!questData) return <div className="admin-loading" style={{color: 'var(--theme-accent)'}}>Loading Databank...</div>;
-
-    if (editingQuestKey) {
-      return (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="admin-form-container">
-          <button className="admin-back-btn" onClick={() => setEditingQuestKey(null)}>&lt; BACK TO LIST</button>
-          <h3 className="admin-title">{editingQuestKey === 'new' ? 'CREATE NEW ENTRY' : `EDIT: ${editingQuestKey}`}</h3>
-          <form onSubmit={handleAdminSave} className="admin-form">
-            <div className="admin-form-group">
-              <label>Title</label>
-              <input required value={adminFormData.title || ''} onChange={e => setAdminFormData({...adminFormData, title: e.target.value})} className="admin-input-retro" />
-            </div>
-            <div className="admin-form-group">
-              <label>System (e.g. SYSTEM.EXE)</label>
-              <input required value={adminFormData.system || ''} onChange={e => setAdminFormData({...adminFormData, system: e.target.value})} className="admin-input-retro" />
-            </div>
-            <div className="admin-form-group">
-              <label>Subtitle</label>
-              <input value={adminFormData.subtitle || ''} onChange={e => setAdminFormData({...adminFormData, subtitle: e.target.value})} className="admin-input-retro" />
-            </div>
-            <div className="admin-form-group">
-              <label>Challenge</label>
-              <textarea required rows="3" value={adminFormData.challenge || ''} onChange={e => setAdminFormData({...adminFormData, challenge: e.target.value})} className="admin-input-retro" />
-            </div>
-            <div className="admin-form-group">
-              <label>Solution</label>
-              <textarea required rows="3" value={adminFormData.solution || ''} onChange={e => setAdminFormData({...adminFormData, solution: e.target.value})} className="admin-input-retro" />
-            </div>
-            <div className="admin-form-group">
-              <label>Tech Stack (comma separated)</label>
-              <input value={adminFormData.stack || ''} onChange={e => setAdminFormData({...adminFormData, stack: e.target.value})} className="admin-input-retro" />
-            </div>
-            
-            <div className="admin-metrics-section">
-              <h4>Metrics</h4>
-              {adminFormData.metrics && adminFormData.metrics.map((m, i) => (
-                <div key={i} className="admin-metric-row">
-                  <input placeholder="Label" value={m.label} onChange={e => handleMetricChange(i, 'label', e.target.value)} className="admin-input-retro" />
-                  <input placeholder="Value" value={m.value} onChange={e => handleMetricChange(i, 'value', e.target.value)} className="admin-input-retro" />
-                  <input placeholder="Desc" value={m.desc} onChange={e => handleMetricChange(i, 'desc', e.target.value)} className="admin-input-retro" />
-                  <button type="button" className="admin-action-btn danger" onClick={() => removeMetric(i)}><Trash2 size={12} /></button>
-                </div>
-              ))}
-              <button type="button" className="admin-add-btn" onClick={addMetric}><Plus size={12}/> Add Metric</button>
-            </div>
-
-            <button type="submit" className="admin-save-btn"><Save size={14} style={{marginRight: '6px'}}/> SAVE TO MAINFRAME</button>
-          </form>
-        </motion.div>
-      );
-    }
-
-    return (
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="tab-pane admin-pane">
-        <div className="pane-header admin-header">
-          <h3 className="warning-text"><Terminal size={16} style={{marginRight:'8px'}}/> SYS_ADMIN OVERRIDE</h3>
-          <p className="pane-subtitle">CAUTION: DIRECT MAINFRAME WRITE ACCESS</p>
-        </div>
-        <div className="admin-quest-list">
-          {Object.keys(questData).map(key => (
-            <div key={key} className="admin-quest-item">
-              <div className="admin-quest-info">
-                <strong>{questData[key].title}</strong>
-                <span>{key}</span>
-              </div>
-              <div className="admin-quest-actions">
-                <button className="admin-action-btn" onClick={() => startEditQuest(key)}><Edit2 size={14} /></button>
-                <button className="admin-action-btn danger" onClick={() => handleDeleteQuest(key)}><Trash2 size={14} /></button>
-              </div>
-            </div>
-          ))}
-          <button className="admin-add-quest-btn" onClick={() => startEditQuest('new')}><Plus size={14} style={{marginRight: '6px'}}/> NEW ENTRY</button>
-        </div>
-      </motion.div>
-    );
-  };
+  // --- Admin panel is now at /?admin=m0s3s-lab-2026 ---
 
   const renderTabContent = () => {
     switch (activeTab) {
