@@ -1,0 +1,64 @@
+:root {
+  /* Warm earthy color palette inspired by artist workspace */
+  --color-bg: #f4ecd8; /* Soft cream/beige */
+  --color-wood: #c27a4d; /* Warm brown */
+  --color-wood-dark: #8b5130;
+  --color-green: #4a6b53; /* Muted plant green */
+  --color-green-light: #7b9c83;
+  --color-accent-orange: #d46c4e; /* Warm orange accent */
+  --color-accent-yellow: #e8b965; /* Soft yellow */
+  --color-text: #2d241f; /* Deep charcoal/brown */
+  --color-shadow: rgba(45, 36, 31, 0.15);
+  --color-paper: #ffffff;
+  
+  --font-main: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Add a subtle grain texture if possible, or just a solid color */
+  background-image: radial-gradient(var(--color-bg) 60%, #e3d5b8 100%);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--color-wood);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-orange);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-wood);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-wood-dark);
+}
