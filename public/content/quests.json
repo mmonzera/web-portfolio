@@ -75,6 +75,21 @@
       "stack": [],
       "images": [],
       "metrics": []
+    },
+    {
+      "id": "quest-1779633913504",
+      "title": "Loan Collection Mobile",
+      "system": "2026",
+      "subtitle": "An intuitive mobile application designed to simplify daily loan management and tracking on the go.",
+      "thumbnail": "/images/upload-1779634057856-frame.png",
+      "content": "",
+      "challenge": "",
+      "solution": "",
+      "isLocked": true,
+      "password": "mw@Lab2026",
+      "stack": [],
+      "images": [],
+      "metrics": []
     }
   ]
 }
