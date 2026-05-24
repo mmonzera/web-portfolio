@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight } from 'lucide-react';
+import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
 import lookingRight from './assets/looking-right.webp';
@@ -15,6 +15,9 @@ function App() {
   const [isGlitching, setIsGlitching] = useState(false);
   const [isLookingRight, setIsLookingRight] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [unlockedQuests, setUnlockedQuests] = useState({});
+  const [unlockPasswordInput, setUnlockPasswordInput] = useState('');
+  const [unlockError, setUnlockError] = useState('');
   const [activeTab, setActiveTab] = useState('about');
   const [rgbTheme, setRgbTheme] = useState('sage');
   const [speechBubble, setSpeechBubble] = useState(null);
@@ -256,9 +259,25 @@ function App() {
 
 
 
+  const handleUnlock = (e, questId, correctPassword) => {
+    e.preventDefault();
+    if (unlockPasswordInput === correctPassword) {
+      setUnlockedQuests(prev => ({ ...prev, [questId]: true }));
+      setUnlockError('');
+      setUnlockPasswordInput('');
+      playStartGameSound(); // Play success sound
+    } else {
+      setUnlockError('ACCESS DENIED: Invalid Password');
+      playCloseSound(); // Play error sound
+    }
+  };
+
   const renderQuestShowcase = () => {
     if (!activeQuest || !questData || !questData[activeQuest]) return null;
     const current = questData[activeQuest];
+    
+    const isLockedAndNeedsUnlock = current.isLocked && !unlockedQuests[current.id];
+
     return (
       <>
         <div className="quest-scanline"></div>
@@ -268,6 +287,8 @@ function App() {
           <button className="quest-back-btn-modern" onClick={() => {
             playCloseSound();
             setActiveQuest(null);
+            setUnlockPasswordInput('');
+            setUnlockError('');
           }}>
             ← Back to Works
           </button>
@@ -277,7 +298,48 @@ function App() {
         </nav>
 
         {/* Main Content Area */}
-        <div className="quest-main-container">
+        {isLockedAndNeedsUnlock ? (
+          <div className="quest-locked-container">
+            <div className="quest-locked-terminal">
+              <div className="locked-icon-wrapper">
+                <Lock size={48} strokeWidth={1.5} />
+              </div>
+              <h2>RESTRICTED ACCESS</h2>
+              <p>This portfolio is protected. Please enter the access password to view the design case study.</p>
+              
+              <form onSubmit={(e) => handleUnlock(e, current.id, current.password)}>
+                <div className="locked-input-group">
+                  <input
+                    type="password"
+                    className="locked-input"
+                    placeholder="ENTER PASSWORD"
+                    value={unlockPasswordInput}
+                    onChange={(e) => {
+                      setUnlockPasswordInput(e.target.value);
+                      setUnlockError('');
+                    }}
+                    autoFocus
+                  />
+                  <button type="submit" className="locked-submit-btn">
+                    UNLOCK
+                  </button>
+                </div>
+                {unlockError && <div className="locked-error">{unlockError}</div>}
+              </form>
+              
+              <div style={{ marginTop: '30px' }}>
+                <span style={{ color: '#8b949e', fontSize: '12px', marginRight: '10px' }}>Need access?</span>
+                <a 
+                  href={`mailto:mosesww10@gmail.com?subject=Request Access to Portfolio: ${current.title}&body=Hi Moses,%0D%0A%0D%0AI would like to request access to your portfolio case study: ${current.title}.`}
+                  className="locked-request-link"
+                >
+                  Request via Email
+                </a>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="quest-main-container">
           
           <header className="quest-hero-header">
             <div className="quest-role-badge">Product Designer // UI/UX</div>
@@ -400,6 +462,7 @@ function App() {
           </div>
 
         </div>
+        )}
       </>
     );
   };
@@ -516,6 +579,11 @@ function App() {
                     <div className="project-preview-overlay">
                       <span className="system-type">{quest.system}</span>
                     </div>
+                    {quest.isLocked && (
+                      <div className="locked-badge" title="Password Required">
+                        <Lock size={12} strokeWidth={2.5} />
+                      </div>
+                    )}
                   </div>
                   <div className="project-info">
                     <h4>{quest.title}</h4>

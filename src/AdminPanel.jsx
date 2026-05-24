@@ -15,6 +15,8 @@ const EMPTY_QUEST = {
   content: '',
   challenge: '',
   solution: '',
+  isLocked: false,
+  password: '',
   stack: [],
   images: [],
   metrics: [],
@@ -616,6 +618,29 @@ export default function AdminPanel() {
                         onChange={e => setEditForm(f => ({ ...f, subtitle: e.target.value }))}
                         placeholder="e.g. STAGE 01 // DEPLOYED FINTECH"
                       />
+                    </div>
+                    <div className="adm-form-group" style={{ gridColumn: '1 / -1', borderTop: '1px dashed #30363d', paddingTop: '15px', marginTop: '5px' }}>
+                      <label className="adm-label" style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', userSelect: 'none' }}>
+                        <input
+                          type="checkbox"
+                          checked={editForm.isLocked || false}
+                          onChange={e => setEditForm(f => ({ ...f, isLocked: e.target.checked }))}
+                          style={{ accentColor: '#ff7b72', width: '16px', height: '16px', cursor: 'pointer' }}
+                        />
+                        🔒 Lock this Portfolio (Require Password)
+                      </label>
+                      {editForm.isLocked && (
+                        <div style={{ marginTop: '12px' }}>
+                          <input
+                            className="adm-input"
+                            value={editForm.password || ''}
+                            onChange={e => setEditForm(f => ({ ...f, password: e.target.value }))}
+                            placeholder="Set Access Password (e.g. moses-lab-2026)"
+                            style={{ borderColor: '#ff7b72', background: 'rgba(255, 123, 114, 0.05)' }}
+                          />
+                          <span className="adm-hint" style={{ color: '#ff7b72' }}>Password will be required to view the content.</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                   
