@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Terminal, Compass, Zap, Layers, Award } from 'lucide-react';
+import { Terminal, Compass, Zap, Layers, Award, GripVertical } from 'lucide-react';
 import './AdminPanel.css';
 
 // ─── Secret password (second layer after URL secret) ───
@@ -72,6 +72,10 @@ export default function AdminPanel() {
   // Save state
   const [saving, setSaving]     = useState(false);
   const [saveMsg, setSaveMsg]   = useState({ type: null, text: '' });
+  
+  // Drag & Drop state
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [hasReordered, setHasReordered] = useState(false);
 
   // Fetch quest data on mount
   useEffect(() => {
@@ -256,6 +260,31 @@ export default function AdminPanel() {
         }
       } else {
         setSaveMsg({ type: 'error', text: `❌ Error: ${data.error}` });
+      }
+    } catch (err) {
+      setSaveMsg({ type: 'error', text: `❌ Network error: ${err.message}` });
+    }
+
+    setSaving(false);
+  };
+
+  const saveReorder = async () => {
+    setSaving(true);
+    setSaveMsg({ type: null, text: '⟳ Saving new order...' });
+
+    try {
+      const res = await fetch('/api/save-quests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quests }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setHasReordered(false);
+        setSaveMsg({ type: 'success', text: data.message.includes('Vercel') ? '✅ Order Saved! Vercel is redeploying... (~30s)' : '✅ Order Saved locally!' });
+      } else {
+        setSaveMsg({ type: 'error', text: `❌ Error saving order: ${data.error}` });
       }
     } catch (err) {
       setSaveMsg({ type: 'error', text: `❌ Network error: ${err.message}` });
@@ -529,7 +558,14 @@ export default function AdminPanel() {
         <div className="adm-sidebar">
           <div className="adm-sidebar-header">
             <span className="adm-sidebar-label">Quest Database</span>
-            <button className="adm-new-btn" onClick={startNewQuest}>+ NEW</button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              {hasReordered && (
+                <button className="adm-new-btn" style={{ backgroundColor: '#2ea043', borderColor: '#2ea043', color: '#fff', animation: 'pulse-lock 2s infinite' }} onClick={saveReorder}>
+                  💾 SAVE ORDER
+                </button>
+              )}
+              <button className="adm-new-btn" onClick={startNewQuest}>+ NEW</button>
+            </div>
           </div>
           <div className="adm-quest-list">
             {loading && (
@@ -542,15 +578,38 @@ export default function AdminPanel() {
                 NO QUESTS YET
               </div>
             )}
-            {quests.map(q => (
+            {quests.map((q, index) => (
               <div
                 key={q.id}
                 className={`adm-quest-item ${selectedId === q.id ? 'active' : ''}`}
+                draggable={true}
+                onDragStart={(e) => {
+                  setDraggedIndex(index);
+                  e.currentTarget.style.opacity = '0.5';
+                }}
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnter={(e) => {
+                  if (draggedIndex === null || draggedIndex === index) return;
+                  const newQuests = [...quests];
+                  const draggedItem = newQuests[draggedIndex];
+                  newQuests.splice(draggedIndex, 1);
+                  newQuests.splice(index, 0, draggedItem);
+                  setQuests(newQuests);
+                  setDraggedIndex(index);
+                  setHasReordered(true);
+                }}
+                onDragEnd={(e) => {
+                  e.currentTarget.style.opacity = '1';
+                  setDraggedIndex(null);
+                }}
                 onClick={() => selectQuest(q)}
               >
-                <div className="adm-quest-item-info">
-                  <div className="adm-quest-item-title">{q.title || '(untitled)'}</div>
-                  <div className="adm-quest-item-id">{q.id}</div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <GripVertical size={14} className="adm-drag-handle" strokeWidth={2} />
+                  <div className="adm-quest-item-info">
+                    <div className="adm-quest-item-title">{q.title || '(untitled)'}</div>
+                    <div className="adm-quest-item-id">{q.id}</div>
+                  </div>
                 </div>
                 <button
                   className="adm-del-btn"

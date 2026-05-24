@@ -230,13 +230,28 @@
 
 .adm-quest-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
   border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.15s;
+  cursor: grab;
+  transition: background 0.15s, opacity 0.2s;
   border: 1px solid transparent;
+}
+
+.adm-quest-item:active { cursor: grabbing; }
+
+.adm-drag-handle {
+  color: #6e7681;
+  margin-right: 8px;
+  cursor: grab;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.adm-quest-item:hover .adm-drag-handle {
+  color: #c9d1d9;
 }
 
 .adm-quest-item:hover { background: #1c2128; }
