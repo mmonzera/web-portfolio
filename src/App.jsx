@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, User, Briefcase, Award, Sparkles, Terminal, Activity, Zap, Layers, Compass, ArrowRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import './App.css';
-import lookingRight from './assets/looking-right.png';
-import lookingLeft from './assets/looking-left.png';
-import bgImgUrl from './assets/bg.jpg';
+import lookingRight from './assets/looking-right.webp';
+import lookingLeft from './assets/looking-left.webp';
+import bgImgUrl from './assets/bg.webp';
 import { playBootSound, playClickSound, playTabSound, playCloseSound, playRgbSwitchSound, playQuestStartSound, playStartGameSound } from './utils/sound';
 
 function App() {
@@ -30,8 +30,8 @@ function App() {
   const quests = questData ? Object.values(questData) : [];
 
   useEffect(() => {
-    // Fetch CMS data with no-store to ensure we always get the latest quests after deployment
-    fetch('/content/quests.json?v=' + Date.now(), { cache: 'no-store' })
+    // Fetch CMS data — allow browser to cache for 5 min to improve repeat visits
+    fetch('/content/quests.json', { cache: 'default' })
       .then(res => res.json())
       .then(data => {
         if (data && data.quests) {
@@ -84,6 +84,10 @@ function App() {
 
 
   useEffect(() => {
+    // Skip mousemove tracking on touch devices (no cursor = no need)
+    const isTouchDevice = navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
     let ticking = false;
     const handleMouseMove = (e) => {
       if (!ticking) {
@@ -94,7 +98,7 @@ function App() {
         ticking = true;
       }
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 

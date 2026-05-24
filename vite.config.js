@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
 
 const vercelApiMock = () => {
   return {
@@ -15,8 +14,8 @@ const vercelApiMock = () => {
           
           if (fs.existsSync(filePath)) {
             // Read body
-            let body = '';
-            req.on('data', chunk => { body += chunk.toString() });
+            let body = ''
+            req.on('data', chunk => { body += chunk.toString() })
             req.on('end', async () => {
               try {
                 if (body) req.body = JSON.parse(body);
@@ -55,5 +54,17 @@ const vercelApiMock = () => {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), vercelApiMock()],
+  build: {
+    target: 'esnext',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/framer-motion')) return 'motion-vendor';
+          if (id.includes('node_modules/react-markdown') || id.includes('node_modules/remark') || id.includes('node_modules/rehype') || id.includes('node_modules/unified') || id.includes('node_modules/micromark') || id.includes('node_modules/mdast') || id.includes('node_modules/hast')) return 'markdown-vendor';
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) return 'react-vendor';
+        },
+      },
+    },
+  },
 })
-

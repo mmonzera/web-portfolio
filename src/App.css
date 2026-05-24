@@ -1,7 +1,5 @@
 /* ===== SYSTEM PRESETS & TYPOGRAPHY ===== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Press+Start+2P&display=swap');
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -31,7 +29,6 @@ textarea {
   z-index: 9999;
   overflow: hidden;
   font-family: 'Press Start 2P', monospace;
-  image-rendering: pixelated;
 }
 
 /* Scanlines CRT effect */
@@ -368,7 +365,7 @@ textarea {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('./assets/bg.jpg');
+  background-image: url('./assets/bg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -522,34 +519,7 @@ textarea {
   }
 }
 
-/* Extra light rays emanating from monitor */
-.monitor-glow::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at center,
-      rgba(200, 230, 200, 0.08) 0%,
-      transparent 70%);
-  transform: translate(-50%, -50%);
-  animation: lightPulse 3s ease-in-out infinite;
-}
 
-@keyframes lightPulse {
-
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-
-  50% {
-    transform: translate(-50%, -50%) scale(1.25);
-    opacity: 1;
-  }
-}
 
 /* Character container scaling & positioning (Perfect scale-lock inside 16:9 workstation wrapper) */
 .character-container {
@@ -861,63 +831,7 @@ textarea {
   text-transform: uppercase;
 }
 
-/* ===== SIDE INTERACTIVE CHARACTERS ===== */
-.side-character {
-  position: absolute;
-  bottom: 10%;
-  z-index: 8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
-  filter: brightness(0.6) saturate(0.5);
-}
 
-.side-character:hover {
-  transform: translateY(-10px) scale(1.08);
-  filter: brightness(1) saturate(1);
-}
-
-.side-left {
-  left: 6%;
-}
-
-.side-right {
-  right: 6%;
-}
-
-.side-char-img {
-  width: 100px;
-  height: auto;
-  object-fit: contain;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  image-rendering: auto;
-}
-
-.side-char-img.active {
-  transform: scale(1.15);
-  filter: drop-shadow(0 0 20px rgba(200, 230, 200, 0.6));
-}
-
-.side-char-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: #94a3b8;
-  background: rgba(10, 8, 18, 0.6);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(var(--theme-accent-rgb), 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  white-space: nowrap;
-}
-
-.side-character:hover .side-char-label {
-  opacity: 1;
-}
 
 /* ===== TOOLBOX DESIGN STACK POPUP ===== */
 .toolstack-popup {
@@ -1337,70 +1251,7 @@ textarea {
   gap: 9px;
 }
 
-.stat-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
 
-.stat-label {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7.5px;
-  color: #94a3b8;
-}
-
-.stat-value {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7.5px;
-  color: #fff;
-}
-
-.stat-bar-container {
-  flex: 1;
-  max-width: 110px;
-  height: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--theme-accent), var(--theme-accent-light));
-  box-shadow: 0 0 6px rgba(var(--theme-accent-rgb), 0.4);
-  border-radius: 2px;
-}
-
-.stat-bar-fill.hp {
-  background: linear-gradient(90deg, #e94560, #ff6b6b);
-  box-shadow: 0 0 6px rgba(233, 69, 96, 0.4);
-}
-
-.stat-bar-fill.mp {
-  background: linear-gradient(90deg, #0f3460, #42a5f5);
-  box-shadow: 0 0 6px rgba(66, 165, 245, 0.4);
-}
-
-.stat-bar-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Press Start 2P', monospace;
-  font-size: 6px;
-  color: #fff;
-  font-weight: bold;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
-}
-
-.stat-divider {
-  height: 1px;
-  background: rgba(123, 156, 131, 0.12);
-  margin: 3px 0;
-}
 
 /* Skills panel multi-line text */
 .skills-text {
@@ -1474,33 +1325,7 @@ textarea {
   font-size: 14.5px;
 }
 
-.hobbies-tags {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-}
 
-.hobby-tag {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 7px;
-  color: #cbd5e1;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-}
-
-.hobby-tag:hover {
-  background: rgba(var(--theme-accent-rgb), 0.12);
-  border-color: rgba(var(--theme-accent-rgb), 0.35);
-  color: var(--theme-accent-light);
-  transform: translateY(-2px);
-}
 
 /* Social links (LinkedIn & GitHub) */
 .social-links {
@@ -1578,17 +1403,7 @@ textarea {
   padding: 10px;
 }
 
-.preview-1 {
-  background: linear-gradient(135deg, rgba(var(--theme-accent-rgb), 0.2), rgba(15, 12, 41, 0.5));
-}
 
-.preview-2 {
-  background: linear-gradient(135deg, rgba(233, 69, 96, 0.2), rgba(15, 12, 41, 0.5));
-}
-
-.preview-3 {
-  background: linear-gradient(135deg, rgba(83, 52, 131, 0.22), rgba(15, 12, 41, 0.5));
-}
 
 .system-type {
   font-family: 'Press Start 2P', monospace;
@@ -2230,8 +2045,8 @@ textarea {
 /* ===== QUEST DETAIL SHOWCASE STYLING (PREMIUM SINGLE-COLUMN) ===== */
 .quest-showcase-screen {
   position: fixed;
-  inset: 0; /* Ensures absolutely no edge bleeding */
-  background: #0B0E14; /* Deep dark solid base for performance */
+  inset: 0;
+  background: #0B0E14;
   will-change: opacity, transform;
   z-index: 1500;
   display: flex;
@@ -2239,7 +2054,8 @@ textarea {
   color: #F1F5F9;
   font-family: 'Inter', sans-serif;
   overflow-y: auto;
-  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
 }
 
 .quest-scanline {
@@ -2620,41 +2436,9 @@ textarea {
   }
 }
 
-@media (max-width: 768px) {
-  .quest-showcase-layout {
-    flex-direction: column;
-  }
-  
-  .quest-sidebar {
-    display: none;
-  }
-  
-  .quest-mobile-header {
-    display: flex;
-  }
-  
-  .quest-main-content {
-    padding: 25px 20px;
-    height: calc(100vh - 60px);
-  }
-  
-  .quest-neon-title {
-    font-size: 20px;
-  }
-  
-  .quest-cover-visual {
-    height: 200px;
-  }
-  
-  .metric-achievement-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 15px;
-  }
-}
 
 /* ===== RETRO-ARCADE TITLE SCREEN STYLES ===== */
+
 
 .title-screen-container {
   display: flex;
