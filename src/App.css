@@ -2174,6 +2174,26 @@ textarea {
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .quest-launch-content {
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  .quest-launch-title {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .quest-launch-name {
+    font-size: 14px;
+    word-break: break-word;
+  }
+  .quest-launch-bar-outer {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
 /* Hyper-Space Warp Rings */
 .quest-warp-container {
   position: absolute;
