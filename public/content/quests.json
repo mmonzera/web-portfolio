@@ -13,7 +13,7 @@
       "metrics": [
         {
           "label": "Task completion time",
-          "value": "+80%",
+          "value": "-80%",
           "desc": ""
         },
         {
