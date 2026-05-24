@@ -30,7 +30,7 @@ function App() {
   const containerRef = useRef(null);
   const bgLoadedRef = useRef(false);
 
-  const quests = questData ? Object.values(questData) : [];
+  const quests = questData || [];
 
   useEffect(() => {
     // Fetch CMS data — allow browser to cache for 5 min to improve repeat visits
@@ -38,9 +38,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         if (data && data.quests) {
-          const map = {};
-          data.quests.forEach(q => map[q.id] = q);
-          setQuestData(map);
+          setQuestData(data.quests);
         }
       })
       .catch(err => console.error("Error loading quests.json:", err));
@@ -273,8 +271,9 @@ function App() {
   };
 
   const renderQuestShowcase = () => {
-    if (!activeQuest || !questData || !questData[activeQuest]) return null;
-    const current = questData[activeQuest];
+    if (!activeQuest || !questData) return null;
+    const current = questData.find(q => q.id === activeQuest);
+    if (!current) return null;
     
     const isLockedAndNeedsUnlock = current.isLocked && !unlockedQuests[current.id];
 
