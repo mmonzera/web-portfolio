@@ -1331,7 +1331,28 @@ textarea {
 .social-links {
   display: flex;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 15px;
+}
+
+.cv-download-btn {
+  display: flex;
+  align-items: center;
+  background: var(--accent);
+  color: #0b0e14;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: auto;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.cv-download-btn:hover {
+  background: #fff;
+  transform: translateY(-1px);
 }
 
 .social-link {
