@@ -276,7 +276,7 @@ function App() {
         <div className="quest-main-container">
           
           <header className="quest-hero-header">
-            <div className="quest-role-badge">Lead Product Designer // UI/UX</div>
+            <div className="quest-role-badge">Product Designer // UI/UX</div>
             <h1 className="quest-modern-title">{current.title}</h1>
             <div className="quest-header-meta">
               {current.system} — {current.subtitle}

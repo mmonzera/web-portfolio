@@ -797,7 +797,7 @@ export default function AdminPanel() {
                     <div className="quest-main-container" style={{ padding: '35px 20px 80px 20px' }}>
                       
                       <header className="quest-hero-header" style={{ marginBottom: 30 }}>
-                        <div className="quest-role-badge">Lead Product Designer // UI/UX</div>
+                        <div className="quest-role-badge">Product Designer // UI/UX</div>
                         <h1 className="quest-modern-title" style={{ fontSize: 36 }}>{editForm.title || '(untitled quest)'}</h1>
                         <div className="quest-header-meta">
                           {editForm.system || 'SYSTEM_NAME.EXE'} — {editForm.subtitle || 'STAGE 01 // SUBTITLE'}
