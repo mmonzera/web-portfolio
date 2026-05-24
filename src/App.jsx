@@ -29,8 +29,8 @@ function App() {
   const quests = questData ? Object.values(questData) : [];
 
   useEffect(() => {
-    // Fetch CMS data
-    fetch('/content/quests.json')
+    // Fetch CMS data with no-store to ensure we always get the latest quests after deployment
+    fetch('/content/quests.json?v=' + Date.now(), { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
         if (data && data.quests) {
@@ -306,67 +306,89 @@ function App() {
             ))}
           </div>
 
-          <section className="quest-article-section">
-            <h2 className="quest-section-title-modern">
-              <Compass size={20} /> The Challenge
-            </h2>
-            <div className="quest-article-text quest-markdown">
-              <ReactMarkdown
-                components={{
-                  img: ({src, alt}) => (
-                    <div className="quest-inline-img">
-                      <img src={src} alt={alt} />
-                      {alt && <span className="quest-img-caption">{alt}</span>}
-                    </div>
-                  )
-                }}
-              >{current.challenge}</ReactMarkdown>
-            </div>
-          </section>
-
-          <section className="quest-article-section">
-            <h2 className="quest-section-title-modern">
-              <Zap size={20} /> The Solution
-            </h2>
-            <div className="quest-article-text quest-markdown">
-              <ReactMarkdown
-                components={{
-                  img: ({src, alt}) => (
-                    <div className="quest-inline-img">
-                      <img src={src} alt={alt} />
-                      {alt && <span className="quest-img-caption">{alt}</span>}
-                    </div>
-                  )
-                }}
-              >{current.solution}</ReactMarkdown>
-            </div>
-          </section>
-
-          <section className="quest-article-section">
-            <h2 className="quest-section-title-modern">
-              <Layers size={20} /> Tech Stack & Tools
-            </h2>
-            <div className="quest-tech-tags">
-              {current.stack && current.stack.map(tech => (
-                <span key={tech} className="quest-tech-tag-modern">{tech}</span>
-              ))}
-            </div>
-          </section>
-
-          {/* Gallery Images — shown when images are uploaded via CMS */}
-          {current.images && current.images.length > 0 && (
+          {current.content ? (
             <section className="quest-article-section">
-              <h2 className="quest-section-title-modern">
-                <Layers size={20} /> Design Gallery
-              </h2>
-              <div className="quest-gallery-grid">
-                {current.images.map((img, idx) => (
-                  <div key={idx} className="quest-gallery-item">
-                    <img src={img} alt={`${current.title} screenshot ${idx + 1}`} />
-                  </div>
-                ))}
+              <div className="quest-article-text quest-markdown">
+                <ReactMarkdown
+                  components={{
+                    img: ({src, alt}) => (
+                      <span className="quest-inline-img" style={{ display: 'block' }}>
+                        <img src={src} alt={alt} style={{ display: 'block', width: '100%' }} />
+                        {alt && <span className="quest-img-caption" style={{ display: 'block' }}>{alt}</span>}
+                      </span>
+                    ),
+                    h1: ({children}) => <h1 className="quest-section-title-modern">{children}</h1>,
+                    h2: ({children}) => <h2 className="quest-section-title-modern">{children}</h2>,
+                    h3: ({children}) => <h3 className="quest-section-title-modern" style={{ borderBottom: 'none', paddingBottom: 0, marginTop: '20px' }}>{children}</h3>,
+                  }}
+                >{current.content}</ReactMarkdown>
               </div>
             </section>
+          ) : (
+            <>
+              <section className="quest-article-section">
+                <h2 className="quest-section-title-modern">
+                  <Compass size={20} /> The Challenge
+                </h2>
+                <div className="quest-article-text quest-markdown">
+                  <ReactMarkdown
+                    components={{
+                      img: ({src, alt}) => (
+                        <div className="quest-inline-img">
+                          <img src={src} alt={alt} />
+                          {alt && <span className="quest-img-caption">{alt}</span>}
+                        </div>
+                      )
+                    }}
+                  >{current.challenge}</ReactMarkdown>
+                </div>
+              </section>
+
+              <section className="quest-article-section">
+                <h2 className="quest-section-title-modern">
+                  <Zap size={20} /> The Solution
+                </h2>
+                <div className="quest-article-text quest-markdown">
+                  <ReactMarkdown
+                    components={{
+                      img: ({src, alt}) => (
+                        <div className="quest-inline-img">
+                          <img src={src} alt={alt} />
+                          {alt && <span className="quest-img-caption">{alt}</span>}
+                        </div>
+                      )
+                    }}
+                  >{current.solution}</ReactMarkdown>
+                </div>
+              </section>
+
+              <section className="quest-article-section">
+                <h2 className="quest-section-title-modern">
+                  <Layers size={20} /> Tech Stack & Tools
+                </h2>
+                <div className="quest-tech-tags">
+                  {current.stack && current.stack.map(tech => (
+                    <span key={tech} className="quest-tech-tag-modern">{tech}</span>
+                  ))}
+                </div>
+              </section>
+
+              {/* Gallery Images — shown when images are uploaded via CMS */}
+              {current.images && current.images.length > 0 && (
+                <section className="quest-article-section">
+                  <h2 className="quest-section-title-modern">
+                    <Layers size={20} /> Design Gallery
+                  </h2>
+                  <div className="quest-gallery-grid">
+                    {current.images.map((img, idx) => (
+                      <div key={idx} className="quest-gallery-item">
+                        <img src={img} alt={`${current.title} screenshot ${idx + 1}`} />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </>
           )}
 
           <div className="quest-end-marker">

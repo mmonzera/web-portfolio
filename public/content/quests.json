@@ -2,15 +2,32 @@
   "quests": [
     {
       "id": "quest-1779607741698",
-      "title": "",
-      "system": "",
-      "subtitle": "",
-      "thumbnail": "",
+      "title": "Gen AI Companion for  Digital Lending Platform",
+      "system": "2025",
+      "subtitle": "Leveraging Gen AI to future-proof the platform and simplify complex data analysis, transforming how users interact with and interpret information.",
+      "thumbnail": "/images/upload-1779622102071-screenshot-2026-05-24-at-15-01-34.png",
       "challenge": "",
       "solution": "",
       "stack": [],
       "images": [],
-      "metrics": []
+      "metrics": [
+        {
+          "label": "Task completion time",
+          "value": "+80%",
+          "desc": ""
+        },
+        {
+          "label": "Frequency of AI interactions",
+          "value": "+80%",
+          "desc": ""
+        },
+        {
+          "label": "Qualitative user confidence feedback",
+          "value": "+50%",
+          "desc": ""
+        }
+      ],
+      "content": "## **Problem Statement**\n\n**How might we design Gen AI so it feels approachable, trustworthy, and helpful for analysts in a digital lending platform?**\n\n## **Key Paint Points**\n\n- Cognitive overload from multiple alerts\n- Difficulty understanding AI-generated signals\n- Low confidence in AI recommendations\n- Limited AI feature adoption\n\n## **Goals & Success Metrics**\n\n**Business Goals**\n- Increase AI feature adoption\n- Reduce analysis time\n- Improve decision accuracy\n\n**Users Goals**\n- Understand risk faster\n- Feel supported, not replaced by AI\n- Ask questions in natural language\n\n**UX Success Metrics**\n- Task completion time\n- Frequency of AI interactions\n- Qualitative user confidence feedback\n\n## **UX Strategy : AI as a Companion**\n\n**Gen AI should behave like a teammate, not just a tool.**\n\n**Strategy Approach**\n\nPosition AI as:\n- A trusted companion\n- A co-pilot for analysis\n- A discussion partner\n\n**Solution**\n\nDeveloping an application mascot to position Generative AI as a supportive partner, guiding users through seamless platform navigation and complex tasks.\n\n**Why Mascott?**\n- Humanizes AI interaction\n- Builds emotional trust\n- Reduces user resistance\n- Makes AI feel approachable\n\n## **Mascot Concept & Personality**\n\n**Personality Traits**\n- Friendly but professional\n- Calm and supportive\n- Confident but not authoritative\n\n**Tone of Voice**\n- “I can help summarize this for you.”\n- “This transaction looks risky because…”\n- “Would you like a deeper explanation?”\n\n\n![Image](/images/upload-1779623694405-screenshot-2026-05-24-at-18-54-37.png)\n\n\n## **Gen AI Design**\n\n![Image](/images/upload-1779623751646-screenshot-2026-05-24-at-18-55-28.png)\n\n\n![Image](/images/upload-1779623949247-screenshot-2026-05-24-at-18-58-59.png)\n\n**Design Decision**\n- AI Assistance panel placed on the right for easy access\n- Mascot is visible but non-intrusive\n- Chat-based interaction for flexibility\n- Context-aware AI responses\n\n## **Impact & Result**\n\n**User Impact**\n- Reduced cognitive load\n- Faster understanding of fraud cases\n- Increased confidence in decision-making\n\n**Business Impact (Projected)**\n- Faster case resolution\n- Higher AI adoption\n- Reduced operational cost\n\n\n\n\n\n\n\n\n "
     }
   ]
 }
