@@ -90,6 +90,21 @@
       "stack": [],
       "images": [],
       "metrics": []
+    },
+    {
+      "id": "quest-1779635174634",
+      "title": "Centralized Loan Collection Hub",
+      "system": "2026",
+      "subtitle": "A comprehensive web dashboard designed to optimize banking operations, track SLA Count for tasks in progress, and streamline the overall recovery workflow.",
+      "thumbnail": "/images/upload-1779635260369-frame2.png",
+      "content": "",
+      "challenge": "",
+      "solution": "",
+      "isLocked": true,
+      "password": "mw@Lab2026",
+      "stack": [],
+      "images": [],
+      "metrics": []
     }
   ]
 }
