@@ -472,48 +472,28 @@ function App() {
             <h2 className="quest-section-title-modern">
               <Activity size={20} /> Check Another Works
             </h2>
-            <div className="projects-grid" style={{ marginTop: '20px' }}>
+            <div className="quest-list-related">
               {questData.filter(q => q.id !== current.id).map((quest, i) => (
                 <div
                   key={quest.id}
-                  className="project-card"
+                  className="quest-list-item"
                   onMouseEnter={() => playClickSound(600 + i * 50, 0.04, 'triangle')}
+                  onClick={() => {
+                    playClickSound(1200, 0.15, 'sawtooth');
+                    setTimeout(() => {
+                      setActiveQuest(quest.id);
+                      document.querySelector('.quest-showcase-screen').scrollTop = 0;
+                    }, 100);
+                  }}
                 >
-                  <div
-                    className="project-preview"
-                    style={quest.thumbnail
-                      ? { backgroundImage: `url(${quest.thumbnail})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-                      : { background: `linear-gradient(135deg, hsl(${220 + i * 30}, 30%, 14%), hsl(${220 + i * 30}, 25%, 8%))` }
-                    }
-                  >
-                    <div className="project-preview-overlay">
-                      <span className="system-type">{quest.system}</span>
-                    </div>
-                    {quest.isLocked && (
-                      <div className="locked-badge" title="Password Required">
-                        <Lock size={12} strokeWidth={2.5} />
-                      </div>
-                    )}
-                  </div>
-                  <div className="project-info">
-                    <h4>{quest.title}</h4>
+                  <div className="quest-list-item-content">
+                    <h4>
+                      {quest.title}
+                      {quest.isLocked && <Lock size={12} className="list-lock-icon" strokeWidth={2.5} />}
+                    </h4>
                     <p>{quest.subtitle}</p>
-                    <div className="tags-container">
-                      {quest.stack && quest.stack.slice(0, 3).map(t => (
-                        <span key={t} className="tag">{t.toUpperCase()}</span>
-                      ))}
-                    </div>
-                    <button className="launch-quest-btn" onClick={() => {
-                      // Small delay for effect, then reset scrolling by setting active quest again
-                      playClickSound(1200, 0.15, 'sawtooth');
-                      setTimeout(() => {
-                        setActiveQuest(quest.id);
-                        document.querySelector('.quest-showcase-screen').scrollTop = 0;
-                      }, 100);
-                    }}>
-                      VIEW PROJECT <ArrowRight size={10} style={{ marginLeft: '4px' }} />
-                    </button>
                   </div>
+                  <ArrowRight size={18} className="quest-list-arrow" />
                 </div>
               ))}
             </div>
