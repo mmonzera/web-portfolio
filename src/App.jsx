@@ -460,7 +460,7 @@ function App() {
                 </div>
                 <div className="about-text">
                   <p>
-                    Senior-track Product Designer with 4+ years driving end-to-end design for iDecision, a Digital Lending Platform serving multiple banking institutions. Deep domain expertise in Financial Crime Management (AML, KYC, Fraud), loan origination, and field collection — spanning the full product lifecycle from user research to production handoff. Proven track record establishing design foundations from scratch, including a 30-40 component design system adopted by 3 engineering teams. Actively expanding scope toward Product Management, with strong experience in stakeholder alignment, requirements definition, and data-driven decision-making.
+                    Product Designer with 4+ years driving end-to-end design for iDecision, a Digital Lending Platform serving multiple banking institutions. Deep domain expertise in Financial Crime Management (AML, KYC, Fraud), loan origination, and field collection — spanning the full product lifecycle from user research to production handoff. Proven track record establishing design foundations from scratch, including a 30-40 component design system adopted by 3 engineering teams. Actively expanding scope toward Product Management, with strong experience in stakeholder alignment, requirements definition, and data-driven decision-making.
                   </p>
                   <blockquote className="quote-box">
                     "Building clean pixel-perfect logic, one keystroke at a time."
