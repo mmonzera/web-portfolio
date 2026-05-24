@@ -23,6 +23,7 @@ function App() {
   const [questProgress, setQuestProgress] = useState(0);
   const [activeQuest, setActiveQuest] = useState(null);
   const [questData, setQuestData] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState(null);
   const containerRef = useRef(null);
   const bgLoadedRef = useRef(false);
 
@@ -282,10 +283,9 @@ function App() {
             </div>
           </header>
 
-          {/* Cover Visual — shows thumbnail if set, otherwise a placeholder */}
           {current.thumbnail ? (
             <div className="quest-cover-img">
-              <img src={current.thumbnail} alt={`${current.title} cover`} />
+              <img src={current.thumbnail} alt={`${current.title} cover`} style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage(current.thumbnail)} />
             </div>
           ) : (
             <div className="quest-cover-visual">
@@ -313,7 +313,7 @@ function App() {
                   components={{
                     img: ({src, alt}) => (
                       <span className="quest-inline-img" style={{ display: 'block' }}>
-                        <img src={src} alt={alt} style={{ display: 'block', width: '100%' }} />
+                        <img src={src} alt={alt} style={{ display: 'block', width: '100%', cursor: 'zoom-in' }} onClick={() => setLightboxImage(src)} />
                         {alt && <span className="quest-img-caption" style={{ display: 'block' }}>{alt}</span>}
                       </span>
                     ),
@@ -335,7 +335,7 @@ function App() {
                     components={{
                       img: ({src, alt}) => (
                         <div className="quest-inline-img">
-                          <img src={src} alt={alt} />
+                          <img src={src} alt={alt} style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage(src)} />
                           {alt && <span className="quest-img-caption">{alt}</span>}
                         </div>
                       )
@@ -353,7 +353,7 @@ function App() {
                     components={{
                       img: ({src, alt}) => (
                         <div className="quest-inline-img">
-                          <img src={src} alt={alt} />
+                          <img src={src} alt={alt} style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage(src)} />
                           {alt && <span className="quest-img-caption">{alt}</span>}
                         </div>
                       )
@@ -382,7 +382,7 @@ function App() {
                   <div className="quest-gallery-grid">
                     {current.images.map((img, idx) => (
                       <div key={idx} className="quest-gallery-item">
-                        <img src={img} alt={`${current.title} screenshot ${idx + 1}`} />
+                        <img src={img} alt={`${current.title} screenshot ${idx + 1}`} style={{ cursor: 'zoom-in' }} onClick={() => setLightboxImage(img)} />
                       </div>
                     ))}
                   </div>
@@ -799,6 +799,33 @@ function App() {
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             {renderQuestShowcase()}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Lightbox */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            className="lightbox-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightboxImage(null)}
+          >
+            <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
+              <X size={24} />
+            </button>
+            <motion.img
+              src={lightboxImage}
+              alt="Enlarged"
+              className="lightbox-image"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            />
           </motion.div>
         )}
       </AnimatePresence>

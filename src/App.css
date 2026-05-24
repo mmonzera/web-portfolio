@@ -66,7 +66,9 @@ textarea {
     inset 0 0 20px rgba(0, 0, 0, 0.5);
   position: relative;
   text-align: center;
-  min-width: 400px;
+  width: 90vw;
+  max-width: 400px;
+  box-sizing: border-box;
 }
 
 /* "LOADING" title with pixel bounce */
@@ -135,7 +137,8 @@ textarea {
 
 /* Progress bar outer shell */
 .bar-outer {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   height: 30px;
   background: #0f3460;
   border: 3px solid #533483;
@@ -146,6 +149,7 @@ textarea {
     inset 0 2px 4px rgba(0, 0, 0, 0.5),
     0 0 10px rgba(83, 52, 131, 0.3);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* Progress bar fill */
@@ -1103,6 +1107,75 @@ textarea {
   overflow-y: auto;
   color: #cbd5e1;
   background: rgba(10, 8, 18, 0.08);
+}
+
+/* Hide mobile scrollbar but allow scroll */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .loading-border {
+    padding: 30px 20px;
+  }
+
+  .quest-cover-img {
+    height: 150px;
+  }
+
+  .bar-outer {
+    height: 15px;
+  }
+}
+
+/* Image Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10001;
+}
+
+.lightbox-close:hover {
+  background: #e94560;
+  border-color: #e94560;
+  transform: rotate(90deg);
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  cursor: zoom-out;
 }
 
 /* Custom scrollbar for body */
@@ -2371,6 +2444,12 @@ textarea {
   margin-bottom: 50px;
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .quest-cover-img {
+    height: 250px;
+  }
 }
 
 .quest-cover-img img {
