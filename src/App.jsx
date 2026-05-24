@@ -553,7 +553,7 @@ function App() {
                   <h4 className="timeline-role">Product Designer</h4>
                   <div className="timeline-company-badge">ID/X Partners (ID/X Optus) | Jakarta</div>
                   <ul className="timeline-bullets">
-                    <li>Joined as the founding Product Designer, establishing design vision, processes, and standards from the ground up — including logo redesign and full product rebranding.</li>
+                    <li>Joined as the first Product Designer, establishing design vision, processes, and standards from the ground up — including logo redesign and full product rebranding.</li>
                     <li>Designed and shipped 20+ modules across the iDecision platform (onboarding, loan processing, collection, KYC, AML, fraud) deployed to multiple banking clients.</li>
                     <li>Led end-to-end redesign of the Collection Management module, restructuring field agent workflows and significantly reducing task-completion time.</li>
                     <li>Co-built a scalable design system of 30-40 components adopted by 3 engineering teams, improving design-dev handoff consistency and reducing rework.</li>
