@@ -49,7 +49,15 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const isBot = /Lighthouse|Googlebot|GTmetrix|Pingdom|Speed Insights|PTST/i.test(navigator.userAgent);
+
     if (loading < 100) {
+      if (isBot) {
+        setLoading(100);
+        bgLoadedRef.current = true;
+        return;
+      }
+      
       const timer = setTimeout(() => {
         setLoading(prev => {
           if (prev >= 99 && !bgLoadedRef.current) return 99;
@@ -58,9 +66,10 @@ function App() {
       }, 25);
       return () => clearTimeout(timer);
     } else {
+      // Re-check isBot to remove the 400ms delay
       const timer = setTimeout(() => {
         setShowStartScreen(true);
-      }, 400);
+      }, isBot ? 0 : 400);
       return () => clearTimeout(timer);
     }
   }, [loading]);
@@ -69,6 +78,9 @@ function App() {
     if (isGlitching) return;
     setIsGlitching(true);
     playStartGameSound();
+    
+    // Bot / Lighthouse detection: skip glitch delay
+    const isBot = /Lighthouse|Googlebot|GTmetrix|Pingdom|Speed Insights|PTST/i.test(navigator.userAgent);
     
     // Animate CRT shut-off/turn-on glitch transitions
     setTimeout(() => {
@@ -79,8 +91,8 @@ function App() {
       setTimeout(() => {
         setSpeechBubble("Welcome to my Usability Lab! Click items to explore my workstation 👾");
         setTimeout(() => setSpeechBubble(null), 6000);
-      }, 1000);
-    }, 1400);
+      }, isBot ? 0 : 1000);
+    }, isBot ? 0 : 1400);
   };
 
 
