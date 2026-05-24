@@ -2056,12 +2056,14 @@ textarea {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
-  scrollbar-color: rgba(var(--theme-accent-rgb), 0.35) #0B0E14;
+  color-scheme: dark;
+  scrollbar-color: rgba(123, 156, 131, 0.4) #0B0E14;
   scrollbar-width: thin;
 }
 
 .quest-showcase-screen::-webkit-scrollbar {
   width: 6px;
+  background: #0B0E14;
 }
 
 .quest-showcase-screen::-webkit-scrollbar-track {
@@ -2069,12 +2071,12 @@ textarea {
 }
 
 .quest-showcase-screen::-webkit-scrollbar-thumb {
-  background: rgba(var(--theme-accent-rgb), 0.35);
+  background: rgba(123, 156, 131, 0.45);
   border-radius: 3px;
 }
 
 .quest-showcase-screen::-webkit-scrollbar-thumb:hover {
-  background: rgba(var(--theme-accent-rgb), 0.6);
+  background: rgba(123, 156, 131, 0.75);
 }
 
 .quest-scanline {
